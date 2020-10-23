@@ -14,14 +14,16 @@ namespace DotNetWebAPI.Data
                     Id = 0,
                     Name = "Initial",
                     Description = "A mock Category",
-                    IsActive = true
+                    IsActive = true,
+                    Company = "A"
                 },
                 new Category
                 {
                     Id = 0,
                     Name = "Second",
                     Description = "A second mock Category",
-                    IsActive = false
+                    IsActive = false,
+                    Company = "A"
                 }
             };
             return Categories;
@@ -34,7 +36,8 @@ namespace DotNetWebAPI.Data
                 Id = 0,
                 Name = "Initial",
                 Description = "A mock Category",
-                IsActive = true
+                IsActive = true,
+                Company = "B"
             };
         }
     }
