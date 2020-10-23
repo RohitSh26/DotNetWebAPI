@@ -27,14 +27,14 @@ namespace DotNetWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             services.AddDbContext<CategoryContext>(opt => opt.UseSqlServer
             (Configuration.GetConnectionString("AppConection")));
 
             services.AddControllers();
 
             // Inject mock data dependency
-            services.AddScoped<ICategoryRepo, MockCategoryRepo>();
+            services.AddScoped<ICategoryRepo, SqlCategoryRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
