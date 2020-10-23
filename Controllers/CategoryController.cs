@@ -11,7 +11,12 @@ namespace DotNetWebAPI.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly MockCategoryRepo _repository = new MockCategoryRepo();
+        private readonly ICategoryRepo _repository;
+
+        public CategoryController(ICategoryRepo repository)
+        {
+            _repository = repository;
+        }
 
         [HttpGet]
         public ActionResult <IEnumerable<Category>> GetAllCategories()
