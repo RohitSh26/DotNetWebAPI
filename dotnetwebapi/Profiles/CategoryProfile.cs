@@ -10,6 +10,8 @@ namespace DotNetWebAPI.Profiles
         public CategoryProfile()
         {
             CreateMap<Category, CategoryReadDto>();
+
+            CreateMap<CategoryCreateDto, Category>();
         }
 
     }

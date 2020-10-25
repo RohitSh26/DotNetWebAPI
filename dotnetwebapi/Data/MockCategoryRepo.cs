@@ -5,6 +5,11 @@ namespace DotNetWebAPI.Data
 {
     class MockCategoryRepo : ICategoryRepo
     {
+        public void CreateCategory(Category category)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<Category> GetAllCategories()
         {
             var Categories = new List<Category>
@@ -39,6 +44,11 @@ namespace DotNetWebAPI.Data
                 IsActive = true,
                 Company = "B"
             };
+        }
+
+        public bool SaveChanges()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

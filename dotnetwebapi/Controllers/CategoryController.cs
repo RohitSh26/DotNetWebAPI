@@ -30,7 +30,7 @@ namespace DotNetWebAPI.Controllers
             return Ok(_mapper.Map<IEnumerable<CategoryReadDto>>(categoryItems));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetCategoryById")]
         public ActionResult <CategoryReadDto> GetCategoryById(int id)
         {
             var categoryItem = _repository.GetCategoryById(id: id);
@@ -42,6 +42,24 @@ namespace DotNetWebAPI.Controllers
                 
 
             return NotFound();
+        }
+
+
+        [HttpPost]
+        public ActionResult <CategoryReadDto> CreateCategory(CategoryCreateDto categoryCreateDto)
+        {
+            var categoryModel = _mapper.Map<Category>(categoryCreateDto);
+
+            _repository.CreateCategory(categoryModel);
+
+            _repository.SaveChanges();
+
+
+            var categoryReadDto = _mapper.Map<CategoryReadDto>(categoryModel);
+
+            //return Ok(categoryModel);
+
+            return CreatedAtRoute(nameof(GetCategoryById), new { id = categoryReadDto.Id }, categoryReadDto);
         }
     }
 }

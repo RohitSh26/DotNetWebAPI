@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
+using Newtonsoft.Json.Serialization;
 
 namespace DotNetWebAPI
 {
@@ -31,6 +32,11 @@ namespace DotNetWebAPI
 
             services.AddDbContext<CategoryContext>(opt => opt.UseSqlServer
             (Configuration.GetConnectionString("AppConection")));
+
+            services.AddControllers().AddNewtonsoftJson(s =>
+            {
+                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
             services.AddControllers();
 

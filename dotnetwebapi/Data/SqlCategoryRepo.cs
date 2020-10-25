@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DotNetWebAPI.Models;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace DotNetWebAPI.Data
 {
@@ -11,6 +13,16 @@ namespace DotNetWebAPI.Data
         public SqlCategoryRepo(CategoryContext context)
         {
             _context = context;
+        }
+
+        public void CreateCategory(Category category)
+        {
+            if(category == null)
+            {
+                throw new ArgumentNullException(nameof(category));
+            }
+
+            _context.Categories.Add(category);
         }
 
         public IEnumerable<Category> GetAllCategories()
@@ -24,6 +36,11 @@ namespace DotNetWebAPI.Data
             var item = _context.Categories.FirstOrDefault(item => item.Id == id);
 
             return item;
+        }
+
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges() >= 0);
         }
     }
 }
